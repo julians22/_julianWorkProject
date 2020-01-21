@@ -13,6 +13,12 @@ class Divisi_model extends CI_Model {
         
     }
 
+    public function getDivisi()
+    {
+        $this->db->select('*');
+        $this->db->from('divisi');
+        return $this->db->get()->result_array();
+    }
 }
 
 /* End of file Divisi_model.php */

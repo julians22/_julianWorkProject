@@ -4,6 +4,8 @@ $(function () {
         $('.modal-footer button[type=submit]').html('Submit');
         $('#id').val("");
         $('#menu').val("");
+        $("#target").val("");
+		$("#icon").val("");
         $('.modal-body form').attr('action', 'http://localhost/hc_uptothesky/menu');
     });
 

@@ -1,0 +1,65 @@
+$(document).ready(function() {
+	$("#jenis").change(function() {
+		var id = $(this).val();
+
+		$.ajax({
+			url: "http://localhost/no_surat_centratama/nomor/getSub",
+			method: "POST",
+			data: {
+				jenis: id
+			},
+			async: true,
+			dataType: "json",
+			success: function(data) {
+				var html = "";
+				var i;
+				for (i = 0; i < data.length; i++) {
+					html +=
+						"<option value=" +
+						data[i].tipe_surat +
+						">" +
+						data[i].tipe_surat +
+						"</option>";
+				}
+				$("#tipe").html(html);
+			}
+		});
+		return false;
+	});
+});
+
+
+
+$(document).ready(function() {
+	$("#entity").change(function() {
+		var entity = $("#entity").val();
+		var jenis = $("#jenis").val();
+		var sub = $("#tipe").val();
+		var isi = "";
+
+		$.ajax({
+			url: "http://localhost/no_surat_centratama/nomor/lihatnomor/",
+			method: "POST",
+			data: {
+				jenis : jenis,
+				entity: entity,
+				sub: sub
+			},
+			async: true,
+			dataType: "json",
+			success: function(data) {
+				isi =
+					data.no +
+					"/" +
+					data.entity +
+					"-HC/" +
+					data.sub +
+					"/" +
+					data.bulan +
+					"/" +
+					data.tahun;
+				$(".hasil").val(isi);
+			}
+		});
+	});
+});

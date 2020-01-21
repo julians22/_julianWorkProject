@@ -9,6 +9,7 @@ class Master extends CI_Controller {
         parent::__construct();
         $this->load->model('Employe_model');
         $this->load->model('Divisi_model');
+        $this->load->model('Dept_model');
         is_logged_in();
         
     }
@@ -49,6 +50,18 @@ class Master extends CI_Controller {
         $this->load->view('templates/user_topbar', $data);
         $this->load->view('master/divisi', $data);
         $this->load->view('templates/user_footer');
+    }
+
+    public function getDeptAjax()
+    {
+        $val = $this->input->post('div_id');
+        if ($val) {
+            $data = $this->Dept_model->getDeptById($this->input->post('div_id'));
+            echo json_encode($data);
+        }else{
+            $data = $this->Dept_model->getAll();
+            echo json_encode($data);
+        }
     }
 
 }

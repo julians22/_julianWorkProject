@@ -2,12 +2,16 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #0984e3">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-kiwi-bird"></i>
-        </div>
-        <div class="sidebar-brand-text mx-4">Centratama</div>
-    </a>
+    <!-- Sidebar - Brand -->
+		<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('dashboard'); ?>">
+			<!-- <div class="sidebar-brand-icon rotate-n-15">
+				<i class="fab fa-contao"></i>
+			</div> -->
+			<div class="sidebar-brand-icon">
+				<img src="<?= base_url('assets'); ?>/img/logo3.png" alt="" width="40px">
+			</div>
+			<div class="sidebar-brand-text mt-2 ml-1"><img src="<?= base_url('assets'); ?>/img/logo2.png" alt="" width="130px"> </div>
+		</a>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
