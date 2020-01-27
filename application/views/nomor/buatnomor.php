@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="jenis">Pilih Jenis Surat</label>
                             <select value="<?= set_value('jenis'); ?>" class="form-control" id="jenis" name="jenis">
-                                <option >- Jenis Surat -</option>
+                                <option value="">- Jenis Surat -</option>
                                 <?php foreach ($jenis as $j) : ?>
                                 <option value="<?= $j['id']; ?>"><?= $j['jenis_surat']; ?></option>
                                 <?php endforeach; ?>

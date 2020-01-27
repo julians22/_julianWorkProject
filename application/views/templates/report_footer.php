@@ -97,6 +97,7 @@ $(document).ready(function(){
 
 $(document).ready(function() {
     nTable = $('#table-nomor').DataTable({
+        "autoWidth" : true,
         "processing" : true,
         "serverSide": true,
         "order": [],
@@ -108,10 +109,12 @@ $(document).ready(function() {
             }
         },
         "columnDefs": [
-            {
-                "targets": [0],
-                "orderable": true
-            }
+            { "width": "185px", "targets": [0], "orderable": true },
+            { "width": "185px", "targets": [1], "orderable": true },
+            { "width": "100px", "targets": [2], "orderable": true },
+            { "width": "120px", "targets": [3], "orderable": true },
+            { "width": "185px", "targets": [4], "orderable": true },
+            { "width": "150px", "targets": [5], "orderable": true }
         ]
     });
 
@@ -148,7 +151,7 @@ $(document).ready(function() {
 		var id = $(this).val();
 
 		$.ajax({
-			url: "http://localhost/hc_uptothesky/surat/getSub",
+			url: "<?= base_url('surat/getSub') ?>",
 			method: "POST",
 			data: {
 				jenis: id
@@ -183,7 +186,7 @@ $(document).ready(function() {
 		var isi = "";
 
 		$.ajax({
-			url: "http://localhost/hc_uptothesky/surat/lihatnomor/",
+			url: "<?= base_url('surat/lihatnomor') ?>",
 			method: "POST",
 			data: {
 				jenis : jenis,

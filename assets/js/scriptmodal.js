@@ -7,16 +7,19 @@ $(function () {
         $("#target").val("");
 		$("#icon").val("");
         $('.modal-body form').attr('action', 'http://localhost/hc_uptothesky/menu');
+        // $('.modal-body form').attr('action', 'http://192.168.23.51/hc_uptothesky/menu');
     });
 
     $('.tampilModalUbah').on('click', function () {
         $('#addMenuModalLabel').html('Edit Menu');
         $('.modal-footer button[type=submit]').html('Save Changes');
         $('.modal-body form').attr('action', 'http://localhost/hc_uptothesky/menu/editmenu');
+        // $('.modal-body form').attr('action', 'http://192.168.23.51/hc_uptothesky/menu/editmenu');
         const id = $(this).data('id');
 
         $.ajax({
             url: 'http://localhost/hc_uptothesky/menu/getMenuByID',
+            // url: 'http://192.168.23.51/hc_uptothesky/menu/getMenuByID',
             data: {id : id},
             method: 'post',
             dataType: 'json',

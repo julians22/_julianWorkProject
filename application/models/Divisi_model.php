@@ -10,7 +10,27 @@ class Divisi_model extends CI_Model {
         $this->db->from('divisi');
         $this->db->join('employe', 'employe.nik = divisi.nik_div_head');
         return $this->db->get()->result_array();
-        
+    }
+
+    public function updateDiv()
+    {
+        $data = [
+            'division' => $this->input->post('divisi'),
+            'nik_div_head' => $this->input->post('div_head')
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('divisi', $data);
+    }
+
+    public function getDIvByOrg()
+    {
+        return $this->db->get_where('employe', ['level_org' => 'N'])->result_array();
+    }
+
+    public function ajaxDIvById($id)
+    {
+        return $this->db->get_where('divisi', ['id' => $id])->row_array();
     }
 
     public function getDivisi()

@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			url: "http://localhost/no_surat_centratama/nomor/getSub",
+			// url: "http://192.168.23.51/hc_uptothesky/nomor/getSub",
 			method: "POST",
 			data: {
 				jenis: id
@@ -39,6 +40,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			url: "http://localhost/no_surat_centratama/nomor/lihatnomor/",
+			// url: "http://192.168.23.51/hc_uptothesky/nomor/lihatnomor/",
 			method: "POST",
 			data: {
 				jenis : jenis,

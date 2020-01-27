@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/hc_uptothesky/';
+// $config['base_url'] = 'http://192.168.23.51/hc_uptothesky';
 
 /*
 |--------------------------------------------------------------------------

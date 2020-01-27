@@ -166,7 +166,7 @@ class Employe_model extends CI_Model {
 
     public function getAllEmp()
     {
-        $this->db->select('employe.id as id_emp, employe.emp_name,position_id,id_div,id_dep, position.id, position_name, divisi.id, division, departemen.id, nama_departemen');
+        $this->db->select('employe.id as id_emp, employe.emp_name,nik,level_org,position_id,id_div,id_dep, position.id, position_name, divisi.id, division, departemen.id, nama_departemen');
         $this->db->from('employe');
         $this->db->join('divisi', 'divisi.id = employe.id_div');
         $this->db->join('departemen', 'departemen.id = employe.id_dep');
@@ -186,6 +186,18 @@ class Employe_model extends CI_Model {
         $this->db->order_by('id_emp', 'asc');
         
         return $this->db->get()->result_array();
+    }
+
+    public function getLastNik()
+    {
+        $this->db->select_max('nik');
+        $result = $this->db->get('employe')->row_array();
+        $data = $result['nik'];
+        $nomor = (int) substr($data, 2, 6);
+        $nomor++;
+        $kode = "CG";
+        $nik = $kode . sprintf("%06s", $nomor); 
+        return $nik;
     }
 }
 

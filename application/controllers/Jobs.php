@@ -42,7 +42,7 @@ class Jobs extends CI_Controller {
         $this->load->view('templates/user_sidebar', $data);
         $this->load->view('templates/user_topbar', $data);
         $this->load->view('jobs/index', $data);
-        $this->load->view('templates/user_footer');
+        $this->load->view('templates/jobs_footer');
     }
 
     public function jobprofile()
@@ -57,7 +57,7 @@ class Jobs extends CI_Controller {
         $this->load->view('templates/user_sidebar', $data);
         $this->load->view('templates/user_topbar', $data);
         $this->load->view('user/job_profile', $data);
-        $this->load->view('templates/user_footer');
+        $this->load->view('templates/jobs_footer');
     }
 
     public function insatasan()
@@ -91,7 +91,7 @@ class Jobs extends CI_Controller {
             $this->load->view('templates/user_sidebar', $data);
             $this->load->view('templates/user_topbar', $data);
             $this->load->view('jobs/edittujab', $data);
-            $this->load->view('templates/user_footer');
+            $this->load->view('templates/jobs_footer');
         } else {
             $this->Jobpro_model->updateTuJab();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

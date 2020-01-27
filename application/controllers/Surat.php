@@ -150,7 +150,6 @@ class Surat extends CI_Controller {
 			}
 			
 		} else {
-			// get_where('surat_keluar', ['jenis_surat' => $q]);
 			$sql = $this->M_nomor->getJenisbyId($id);
 		foreach ($sql as $row)
 		{
