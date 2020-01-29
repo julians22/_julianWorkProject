@@ -36,7 +36,15 @@
                             <label for="jenis">Pilih Jenis Surat</label>
                             <select value="<?= set_value('jenis'); ?>" class="form-control" id="jenis" name="jenis">
                                 <option value="">- Jenis Surat -</option>
-                                <?php foreach ($jenis as $j) : ?>
+                                <?php 
+                                    $role_id = $this->session->userdata('akses_surat_id');
+                                    $querySurat = "SELECT `jenis_surat`.`id`,`jenis_surat`
+                                                    FROM `jenis_surat`
+                                                    JOIN `user_access_surat` ON `jenis_surat`.`id` = `user_access_surat`.`surat_id`
+                                                    WHERE `user_access_surat`.`role_surat_id` = $role_id";
+                                    $jenis_surat = $this->db->query($querySurat)->result_array();
+                                ?>
+                                <?php foreach ($jenis_surat as $j) : ?>
                                 <option value="<?= $j['id']; ?>"><?= $j['jenis_surat']; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -58,19 +66,17 @@
                             </select>
 							Wajib Pilih entity
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" id="tampil">Nomor Surat</label>
-                            </div>
-                            <input type="text" name="no" class="form-control hasil" readonly>
+                        <div class="form-group">
+                            <label for="">Nomor Surat</label>
+                            <input type="text" name="no"  class="form-control hasil" readonly>
                         </div>
                         <div class="form-group">
                             <label for="perihal">Perihal:</label>
-                            <textarea class="form-control" rows="5" id="perihal" name="perihal"></textarea>
+                            <textarea class="form-control" id="perihal" name="perihal"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="perihal">Note: (Optional):</label>
-                            <textarea class="form-control" rows="1" id="note" name="note"></textarea>
+                            <textarea class="form-control" rows="5" id="note" name="note"></textarea>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <input type="reset" class="btn btn-warning" value="Reset Nomor">
@@ -92,12 +98,11 @@
                         <table class="table table-hover" id="riwayat-nomor">
                             <thead>
                                 <tr>
-                                    <th width="20%">Nomor Surat</th>
+                                    <th>Nomor Surat</th>
                                     <th>Perihal</th>
-                                    <th>PIC</th>
-                                    <th width="15%">Tanggal</th>
+                                    <th>Tanggal</th>
                                     <th>Note</th>
-                                    <th width="10%">Tipe Surat</th>
+                                    <th>Tipe Surat</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +110,6 @@
                                     <tr>
                                         <td><?= $n['no_surat']; ?></td>
                                         <td><?= $n['perihal']; ?></td>
-                                        <td><?= $n['pic']; ?></td>
                                         <td><?= date("d  F  Y", strtotime($n['tanggal'])); ?></td>
                                         <td><?= $n['note']; ?></td>
                                         <td><?= $n['jenis_surat']; ?></td>

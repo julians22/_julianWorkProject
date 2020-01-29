@@ -10,7 +10,8 @@ class M_nomor extends CI_Model {
 	
 	private function _get_datatables_query()
     {
-
+		$role_id = $this->session->userdata('akses_surat_id');
+		
         //add custom filter here
 		$this->db->select('jenis_surat.jenis_surat as jns_surat, surat_keluar.no_surat, surat_keluar.perihal, surat_keluar.tanggal, surat_keluar.id, surat_keluar.pic, surat_keluar.note, surat_keluar.jenis_surat, surat_keluar.jenis_surat as id_jenis');
         if($this->input->post('jenis_surat'))
@@ -19,6 +20,8 @@ class M_nomor extends CI_Model {
         }
 		$this->db->from($this->table);
 		$this->db->join('surat_keluar', 'surat_keluar.jenis_surat = jenis_surat.id');
+		$this->db->join('user_access_surat', 'jenis_surat.id = user_access_surat.surat_id');
+		$this->db->where('user_access_surat.role_surat_id', $role_id);
 
         $i = 0;
 
@@ -78,10 +81,15 @@ class M_nomor extends CI_Model {
 
 	public function getAll()
 	{
+		$role_id = $this->session->userdata('akses_surat_id');
+		
 		$this->db->select('jenis_surat.jenis_surat, surat_keluar.no_surat, surat_keluar.perihal, surat_keluar.tanggal, surat_keluar.pic, surat_keluar.note');
 		$this->db->from('jenis_surat');
 		$this->db->join('surat_keluar', 'surat_keluar.jenis_surat = jenis_surat.id');
-		$this->db->order_by('surat_keluar.tanggal', 'DESC');
+		$this->db->join('user_access_surat', 'jenis_surat.id = user_access_surat.surat_id');
+		$this->db->where('user_access_surat.role_surat_id', $role_id);
+		$this->db->order_by('surat_keluar.tanggal', 'desc');
+		$this->db->order_by('surat_keluar.no_surat', 'desc');
 		$this->db->limit(10);
 		
 		$query = $this->db->get();
@@ -96,7 +104,6 @@ class M_nomor extends CI_Model {
 	public function getJenis()
 	{
 		return $this->db->get('jenis_surat')->result_array();
-		
 	}
 
 	public function getSubjenis($jenis)

@@ -15,7 +15,7 @@ class Surat extends CI_Controller {
     {
         $data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['title'] = 'Tampil Surat';
-        $data['jenis'] = $this->M_nomor->getJenis();
+        // $data['jenis'] = $this->M_nomor->getJenis();
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_sidebar');
         $this->load->view('templates/user_topbar', $data);
@@ -28,7 +28,6 @@ class Surat extends CI_Controller {
 		$data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
 		$data['title'] = 'Buat Nomor';
 		$data['entity'] = $this->M_nomor->getEntity();
-		$data['jenis'] = $this->M_nomor->getJenis();
 		$data['no'] = $this->M_nomor->getAll();
 		
 

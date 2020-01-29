@@ -9,9 +9,8 @@
             <div class="card shadow-lg">
                 <div class="card-body">
             <?= form_open_multipart('user/edit'); ?>
-            <div class="LI-profile-badge"  data-version="v1" data-size="large" data-locale="in_ID" data-type="vertical" data-theme="dark" data-vanity="deanabner"><a class="LI-simple-link" href='https://id.linkedin.com/in/deanabner?trk=profile-badge'>Dean Abner Julian</a></div>
             <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <label for="email" class="col-sm-2 col-form-label">Nik</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="email" name="email" value="<?= $user['nik']; ?>" readonly>
                 </div>

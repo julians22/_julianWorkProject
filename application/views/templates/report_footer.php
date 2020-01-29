@@ -212,12 +212,6 @@ $(document).ready(function() {
 	});
 });
 
-$('#riwayat-nomor').DataTable({
-    searching: false,
-    paging: false,
-    lengthChange: false,
-    pageLength: 10
-});
 </script>
 
 </body>

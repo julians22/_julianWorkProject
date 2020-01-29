@@ -28,6 +28,8 @@ class Admin extends CI_Controller
         $data ['title'] = 'Role';
         $data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['role'] = $this->db->get('user_role')->result_array();
+        $data['doc'] = $this->db->get('role_surat')->result_array();
+        
         
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_sidebar', $data);
@@ -38,7 +40,7 @@ class Admin extends CI_Controller
 
     public function roleAccess($role_id)
     {
-        $data ['title'] = 'Role Access';
+        $data ['title'] = 'Setting Role Access';
         $data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
 
@@ -51,6 +53,22 @@ class Admin extends CI_Controller
         $this->load->view('templates/user_topbar', $data);
         $this->load->view('admin/roleaccess', $data);
         $this->load->view('templates/user_footer'); 
+    }
+
+    public function roleAccessDoc($role_id)
+    {
+        $data = [
+            'title' => 'Setting Role Access',
+            'user' => $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array(),
+            'role' => $this->db->get_where('role_surat', ['id' => $role_id])->row_array(),
+            'surat' => $this->db->get('jenis_surat')->result_array()
+        ];
+
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('templates/user_sidebar', $data);
+        $this->load->view('templates/user_topbar', $data);
+        $this->load->view('admin/roleaccessdoc', $data);
+        $this->load->view('templates/user_footer');
     }
 
     public function changeAccess()
@@ -69,6 +87,26 @@ class Admin extends CI_Controller
             $this->db->insert('user_access_menu', $data);   
         }else {
             $this->db->delete('user_access_menu', $data);
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Access Changed! </div>');
+    }
+
+    public function changeSuratAccess()
+    {
+        $surat_id = $this->input->post('suratId');
+        $role_id = $this->input->post('roleId');
+        
+        $data = [
+            'role_surat_id' => $role_id,
+            'surat_id' => $surat_id
+        ];
+
+        $access = $this->db->get_where('user_access_surat', $data);
+        if ($access->num_rows() < 1) {
+            $this->db->insert('user_access_surat', $data);
+        }else {
+            $this->db->delete('user_access_surat', $data);
         }
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Access Changed! </div>');

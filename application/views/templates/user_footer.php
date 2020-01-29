@@ -46,7 +46,7 @@ $('.custom-file-input').on('change', function() {
     $(this).next('.custom-file-label').addClass("selected").html(filename);
 });
 
-$('.form-check-input').on('click', function() {
+$('.menu-access').on('click', function() {
     const menuId = $(this).data('menu');
     const roleId = $(this).data('role');
 
@@ -59,6 +59,23 @@ $('.form-check-input').on('click', function() {
         },
         success: function() {
             document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
+        }
+    });
+});
+
+$('.surat-access').on('click', function() {
+    const suratId = $(this).data('surat');
+    const roleId = $(this).data('role');
+
+    $.ajax({
+        url: "<?= base_url('admin/changesurataccess') ?>",
+        type: 'post',
+        data:{
+            suratId: suratId,
+            roleId: roleId
+        },
+        success: function () {
+            document.location.href = "<?= base_url('admin/roleAccessDoc/') ?>" + roleId;
         }
     });
 });

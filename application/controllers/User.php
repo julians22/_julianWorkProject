@@ -60,7 +60,7 @@ class User extends CI_Controller
     {
         $data['title'] = 'Change Password';
         $data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
-        $data['employe'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
+        $data['employe'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
 
         $this->form_validation->set_rules('current_password', 'Current Password', 'trim|required');
         $this->form_validation->set_rules('new_password1', 'New Password', 'trim|required|min_length[5]|matches[new_password2]');
@@ -90,7 +90,7 @@ class User extends CI_Controller
                     $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
                     $this->db->set('password', $password_hash);
                     $this->db->where('nik', $this->session->userdata('nik'));
-                    $this->db->update('user');
+                    $this->db->update('employe');
                     
                     $this->session->set_flashdata('message', '<div class="flash-data" data-flashdata="Changed"></div>');
                     redirect('user/changepassword');

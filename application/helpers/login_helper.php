@@ -23,7 +23,6 @@ function is_logged_in(){
 
 function check_access($role_id, $menu_id)
 {
-    
     $ci =& get_instance();
 
     $ci->db->where('role_id', $role_id);
@@ -36,4 +35,15 @@ function check_access($role_id, $menu_id)
 
 }
 
+function check_surat_access($role_id, $surat_id){
+    $CI =& get_instance();
+    
+    $CI->db->where('role_surat_id', $role_id);
+    $CI->db->where('surat_id', $surat_id);
+    $result = $CI->db->get('user_access_surat');
+
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}
 ?>

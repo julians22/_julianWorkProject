@@ -22,8 +22,9 @@
 
                     <div class="card shadow-lg mt-3">
                         <div class="card-header">
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addRoleModal">Add New
-                                Role</a>
+                            <h5>Setting Access Menu</h5>
+                            <!-- <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addRoleModal">Add New
+                                Role</a> -->
                         </div>
                         <div class="card-body">
                             <table class="table table-hover">
@@ -54,6 +55,43 @@
                         </div>
                     </div>
 
+                </div>
+                <div class="col-lg-6">
+                    
+
+                    <div class="card shadow-lg mt-3">
+                        <div class="card-header">
+                            <h5>Setting Access Document Number</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-header">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i = 1; ?>
+                                    <?php foreach($doc as $d): ?>
+                                        <tr>
+                                            <th scope="row"><?= $i; ?></th>
+                                            <td><?= $d['role']; ?></td>
+                                            <td>
+                                                <a href="<?= base_url('admin/roleaccessdoc/') . $d['id']; ?>" class="badge badge-warning">Access</a>
+                                                <a href="" class="badge badge-info">Edit</a>
+                                                <a href="<?= base_url('menu/delete/') . $d['id'];?>"
+                                                    class="badge badge-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                        <?php $i++ ?>
+                                    <?php endforeach; ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 

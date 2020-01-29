@@ -17,7 +17,6 @@
     <hr class="sidebar-divider">
 
     <?php
-
     $role_id = $this->session->userdata('role_id');
     $queryMenu = "SELECT `user_menu`.`id`,`menu`,`target`, `icon`
                     FROM `user_menu` JOIN `user_access_menu` 

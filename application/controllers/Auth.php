@@ -40,6 +40,7 @@ class Auth extends CI_Controller
                     $data = [
                         'nik' => $user['nik'],
                         'position_id' => $user['position_id'],
+                        'akses_surat_id' => $user['akses_surat_id'],
                         'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
