@@ -102,7 +102,12 @@ class Jobpro_model extends CI_Model {
     public function getKualifikasiById($id)
     {
         return $this->db->get_where('kualifikasi', ['id_posisi' => $id])->row_array();
-    }
+	}
+	
+	public function getStaff($id)
+	{
+		return $this->db->get_where('jumlah_staff', ['id_posisi' => $id])->row_array();
+	}
 
 }
 

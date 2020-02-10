@@ -33,6 +33,7 @@ class Jobs extends CI_Controller {
         $data['mydiv'] = $this->Jobpro_model->getMyDivisi($nik);
         $data['mydept'] = $this->Jobpro_model->getMyDept($nik);
         $data['posisi'] = $this->Jobpro_model->getPosisi($nik);
+        $data['staff'] = $this->Jobpro_model->getStaff($data['posisi']['position_id']);
         $data['tujuanjabatan'] = $this->Jobpro_model->getProfileJabatan($data['posisi']['position_id']);
         $data['pos'] = $this->Jobpro_model->getAllPosition();
         $data['title'] = 'Job Profile';
@@ -386,7 +387,18 @@ class Jobs extends CI_Controller {
         ];
         $this->db->where('id', $this->input->post('id'));
         $this->db->update('jenjang_kar', $data);
-    }
+	}
+	public function updateStaff()
+	{
+		$data = [
+			'manager' => $this->input->post('mgr'),
+			'supervisor' => $this->input->post('spvr'),
+			'staff' => $this->input->post('staf')
+		];
+		$this->db->where('id_posisi', $this->input->post('id_posisi'));
+		$this->db->update('jumlah_staff', $data);
+		echo 'staff updated';
+	}
 }
 
 /* End of file Jobs.php */

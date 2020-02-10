@@ -30,7 +30,8 @@
                     <div class="col-lg-3 font-weight-bold">Departemen</div>
                     <div class="col-lg-8"> : <?= $mydept['nama_departemen']; ?></div>
                 </div>
-
+                <!-- start identifikasi jabatan -->
+                <hr>
                 <div class="row align-items-end mt-3 mb-2">
                     <div class="col">
                         <h5 class="font-weight-bold">Identifikasi Jabatan</h5>
@@ -92,7 +93,8 @@
                     ?> -->
 
                 </div>
-
+                <!-- start tujuan jabatan -->
+                <hr>
                 <div class="row mt-3 mb-2">
                     <div class="col">
                         <h5 class="font-weight-bold">Tujuan Jabatan</h5>
@@ -126,10 +128,10 @@
                             <i class="fas fa-1x fa-pencil-alt"></i>
                         </button>
                     </div>
-
                     <?php endif ; ?>
                 </div>
-
+                <!-- start tanggung jawab utama -->
+                <hr>
                 <div class="row align-items-end mb-2">
                     <div class="col">
                         <h5 class="font-weight-bold">Tanggung Jawab Utama, Aktivitas Utama & Indikator Kinerja:</h5>
@@ -185,7 +187,8 @@
                         </table>
                     </div>
                 </div>
-
+                <!-- start ruang lingkup -->
+                <hr>
                 <?php 
                 $sql = "SELECT * FROM `ruang_lingkup` WHERE `id_posisi` = $posid";
                 $ruangl = $this->db->query($sql)->row_array();
@@ -196,10 +199,7 @@
                         <h6 class="font-weight-light mt-2"><em>(Ruang lingkup dan skala kegiatan yang berhubungan dengan
                                 pekerjaan)</em></h6>
                     </div>
-                    <div class="col d-flex justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-ruang" data-toggle="tooltip"
-                            data-placement="top" title="Edit"><i class="fas fa-1x fa-pencil-alt"></i></button>
-                    </div>
+                    
                 </div>
                 <?php if ($ruangl <= 1): ?>
                 <div class="col-6 mb-3">
@@ -212,6 +212,10 @@
                     </form>
                 </div>
                 <?php else: ?>
+                <div class="col d-flex justify-content-center">
+                        <button type="button" class="btn btn-circle btn-sm btn-success edit-ruang" data-toggle="tooltip"
+                            data-placement="top" title="Edit"><i class="fas fa-1x fa-pencil-alt"></i></button>
+                    </div>
                 <div class="row">
                     <div class="col-11 view-ruang">
                         <?= $ruangl['r_lingkup']; ?>
@@ -224,8 +228,8 @@
                     <button class="batal-edit-ruang mt-2 btn btn-danger btn-sm">Cancel</button>
                 </div>
                 <?php endif ; ?>
-
-
+                <!-- start wewenang -->
+                <hr>
                 <div class="row mt-auto mb-2">
                     <div class="col">
                         <h5 class="font-weight-bold">Wewenang Pengambilan Keputusan Dan Pengawasan</h5>
@@ -234,7 +238,6 @@
                                 aktivitas pekerjaan :</em></h6>
                     </div>
                 </div>
-
                 <div class="col-lg table-responsive">
                     <table class="table" id="wewenang">
                         <thead class="font-weight-bold">
@@ -316,7 +319,8 @@
                         </ul>
                     </div>
                 </div>
-
+                <!-- start hubungan kerja -->
+                <hr>
                 <div class="row mt-4" id="hal5">
                     <div class="col">
                         <h5 class="font-weight-bold">Hubungan Kerja</h5>
@@ -379,7 +383,11 @@
                 </div>
 
                 <?php endif ; ?>
-
+				<!-- start jumlah staff -->
+				<?php 
+				$dataStaff = [$staff['manager'], $staff['supervisor'], $staff['staff']];
+				?>
+                <hr>
                 <div class="row align-items-end mt-2">
                     <div class="col">
                         <h5 class="font-weight-bold">Jumlah Dan Level Staf Yang Dibawahi</h5>
@@ -387,48 +395,48 @@
                                 pertanggungjawaban ke jabatan :</em></h6>
                     </div>
                 </div>
-
                 <dl class="row mt-2">
-                    <dt class="col-1">Jumlah Staff</dt>
+                    <dt class="col-2">Jumlah Staff</dt>
                     <dd class="col-1">
-                        <p class="jumTotStaff"></p>
+                        <p class="jumTotStaff"><?= array_sum($dataStaff); ?></p>
                     </dd>
-                    <dd class="col-10">Orang</dd>
+                    <dd class="col-9">Orang</dd>
 
-                    <dt class="col-1">Manager</dt>
+                    <dt class="col-2">Manager</dt>
                     <dd class="col-2">
                         <div class="input-group input-group-sm mb-3">
-                            <input type="text" id="totMgr" class="form-control form-control-sm">
+                            <input type="text" id="totMgr" class="form-control form-control-sm" value="<?= $staff['manager']; ?>">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">Orang</span>
                             </div>
                         </div>
                     </dd>
-                    <dd class="col-9"></dd>
+                    <dd class="col-8"></dd>
 
-                    <dt class="col-1">Supervisor</dt>
+                    <dt class="col-2">Supervisor</dt>
                     <dd class="col-2">
                         <div class="input-group input-group-sm mb-3">
-                            <input type="text" id="totSpvr" class="form-control form-control-sm">
+                            <input type="text" id="totSpvr" class="form-control form-control-sm" value="<?= $staff['supervisor']; ?>">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">Orang</span>
                             </div>
                         </div>
                     </dd>
-                    <dd class="col-9"></dd>
+                    <dd class="col-8"></dd>
 
 
-                    <dt class="col-1">Staff</dt>
+                    <dt class="col-2">Staff</dt>
                     <dd class="col-2">
                         <div class="input-group input-group-sm mb-3">
-                            <input type="text" id="totStaf" class="form-control form-control-sm">
+                            <input type="text" id="totStaf" class="form-control form-control-sm" value="<?= $staff['staff']; ?>">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="basic-addon2">Orang</span>
                             </div>
                         </div>
                     </dd>
                 </dl>
-
+                <!-- start tantangan dan maslah utama -->
+                <hr>
                 <?php 
                 $sql = "SELECT * FROM `tantangan` WHERE `id_posisi` = $posid";
                 $tan = $this->db->query($sql)->row_array();
@@ -451,7 +459,6 @@
                         <button type="submit" class="btn btn-primary btn-sm">Save</button>
                     </form>
                 </div>
-
                 <?php else : ?>
                 <div class="row mt-2">
                     <div class="col-11">
@@ -475,10 +482,9 @@
                         class="mt-2 btn btn-primary btn-sm">Simpan</button>
                     <button class="batal-edit-tantangan mt-2 btn btn-danger btn-sm">Batal</button>
                 </div>
-
                 <?php endif; ?>
-
-
+                <!-- start kualifikasi dan pengalaman -->
+                <hr>
                 <?php 
                 $sql = "SELECT * FROM `kualifikasi` WHERE `id_posisi` = $posid";
                 $kualifikasi = $this->db->query($sql)->row_array();
@@ -553,8 +559,8 @@
                     </table>
                 </div>
                 <?php endif; ?>
-
-
+                <!-- start jenjang karir -->
+                <hr>
                 <?php 
                 $sql = "SELECT * FROM `jenjang_kar` WHERE `id_posisi` = $posid";
                 $jenk = $this->db->query($sql)->row_array();
