@@ -494,6 +494,28 @@
 			});
 		});
 
+		$('.btnApprove').on('click', function () {
+			const nik = $(this).data('mynik');
+			const id_posisi = $(this).data('position');
+			const atasan1 = $(this).data('atasan1');
+			const atasan2 = $(this).data('atasan2');
+
+			$.ajax({
+				url: "<?= base_url('jobs/setApprove') ?>",
+				type: 'post',
+				data: {
+					nik : nik,
+					id_posisi : id_posisi,
+					atasan1 : atasan1,
+					atasan2 : atasan2
+				},
+				success: function (data) {
+					console.log(data);
+					location.reload();
+				}
+			});
+		});
+
 		CKEDITOR.replace('tujuan_jabatan', {
 			width: 800
 		});

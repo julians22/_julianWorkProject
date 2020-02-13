@@ -25,7 +25,7 @@ class Admin extends CI_Controller
 
     public function role()
     {
-        $data ['title'] = 'Role';
+        $data['title'] = 'Role';
         $data['user'] = $this->db->get_where('employe', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['role'] = $this->db->get('user_role')->result_array();
         $data['doc'] = $this->db->get('role_surat')->result_array();

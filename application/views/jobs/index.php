@@ -45,53 +45,32 @@
                 <div class="row mb-2">
                     <div class="col-lg-3 font-weight-bold">Bertanggung Jawab Kepada</div>
 
-                    <?php if ($my['posnameatasan1'] <= 1): ?>
-                    <form action="<?= base_url('jobs/insatasan'); ?>" method="post">
-                        <input type="hidden" value="<?= $posisi['position_id'] ?>" name="id">
-                        <div class="col mb-1">
-                            <select name="position" class="form-control form-control-sm  border border-danger">
-                                <?php foreach ($pos as $p) : ?>
-                                <option value="<?= $p['id']; ?>"><?= $p['position_name']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col mb-1"><span class="badge badge-danger font-weight-bold">Pilih Posisi Atasan
-                                Anda</span></div>
-                        <div class="col mb-1">
-                            <button type="submit" class="btn btn-sm btn-primary">Save</button>
-                        </div>
-                    </form>
+                    <?php if ($my['posnameatasan1'] <= 1) : ?>
+                        <form action="<?= base_url('jobs/insatasan'); ?>" method="post">
+                            <input type="hidden" value="<?= $posisi['position_id'] ?>" name="id">
+                            <div class="col mb-1">
+                                <select name="position" class="form-control form-control-sm  border border-danger">
+                                    <?php foreach ($pos as $p) : ?>
+                                        <option value="<?= $p['id']; ?>"><?= $p['position_name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col mb-1"><span class="badge badge-danger font-weight-bold">Pilih Posisi Atasan
+                                    Anda</span></div>
+                            <div class="col mb-1">
+                                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                            </div>
+                        </form>
                     <?php else : ?>
-                    <?php 
-                        $id = $my['posnameatasan1']; 
+                        <?php
+                        $id = $my['posnameatasan1'];
                         $query = "SELECT `position_name`
                                 FROM `position`
                                 WHERE `id` = $id";
                         $atasan = $this->db->query($query)->row_array();
                         ?>
-                    <div class="col-lg-8"> : <?= $atasan['position_name']; ?></div>
-
+                        <div class="col-lg-8"> : <?= $atasan['position_name']; ?></div>
                     <?php endif; ?>
-
-                    <!-- <?php
-                    if ($my['posnameatasan1'] <= 1) {
-                        echo '<div class="col-lg-4 mb-1"><select name="position" class="form-control form-control-sm  border border-danger">';
-                        foreach ($pos as $p) {
-                            echo '<option value="' . $p['id'] . '">' .$p['position_name'] . '</option>';
-                        }
-                            echo '</select> </div>';
-                            echo '<div class="col-lg-4 mb-1"><span class="badge badge-danger font-weight-bold">Pilih Posisi Atasan Anda</span></div>';
-                    }else{
-                        $id = $my['posnameatasan1']; 
-                        $query = "SELECT `position_name`
-                                FROM `position`
-                                WHERE `id` = $id";
-                        $atasan = $this->db->query($query)->row_array();
-
-                        echo '<div class="col-lg-8"> : ' . $atasan['position_name'] . '</div>';
-                    }
-                    ?> -->
-
                 </div>
                 <!-- start tujuan jabatan -->
                 <hr>
@@ -101,34 +80,32 @@
                     </div>
                 </div>
                 <div class="row ml-1 mb-2">
-                    <?php if($tujuanjabatan['tujuan_jabatan'] === 0): ?>
-                    <form method="post" action="<?= base_url('jobs/uptuj'); ?>">
-                        <input type="hidden" name="id_posisi" value="<?= $tujuanjabatan['id_posisi']; ?>">
-                        <div class="form-group">
-                            <textarea class="form-control" name="tujuan_jabatan" id="tujuanjabatan"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                    </form>
+                    <?php if ($tujuanjabatan['tujuan_jabatan'] === 0) : ?>
+                        <form method="post" action="<?= base_url('jobs/uptuj'); ?>">
+                            <input type="hidden" name="id_posisi" value="<?= $tujuanjabatan['id_posisi']; ?>">
+                            <div class="form-group">
+                                <textarea class="form-control" name="tujuan_jabatan" id="tujuanjabatan"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </form>
 
                     <?php else : ?>
 
-                    <div class="col-lg-11 view-tujuan">
-                        <?= $tujuanjabatan['tujuan_jabatan']; ?>
-                    </div>
-                    <div class="col-10 editor-tujuan">
-                        <textarea name="tujuan" id="tujuan"><?= $tujuanjabatan['tujuan_jabatan']; ?></textarea>
-                        <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $tujuanjabatan['id']; ?>"
-                            id="simpan-tujuan">Save</button>
-                        <button class="batal-edit-tujuan mt-2 btn btn-danger btn-sm">Cancel</button>
-                        <br>
-                    </div>
-                    <div class="col justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-tujuan"
-                            data-toggle="tooltip" data-placement="top" title="Edit">
-                            <i class="fas fa-1x fa-pencil-alt"></i>
-                        </button>
-                    </div>
-                    <?php endif ; ?>
+                        <div class="col-lg-11 view-tujuan">
+                            <?= $tujuanjabatan['tujuan_jabatan']; ?>
+                        </div>
+                        <div class="col-10 editor-tujuan">
+                            <textarea name="tujuan" id="tujuan"><?= $tujuanjabatan['tujuan_jabatan']; ?></textarea>
+                            <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $tujuanjabatan['id']; ?>" id="simpan-tujuan">Save</button>
+                            <button class="batal-edit-tujuan mt-2 btn btn-danger btn-sm">Cancel</button>
+                            <br>
+                        </div>
+                        <div class="col justify-content-center">
+                            <button type="button" class="btn btn-circle btn-sm btn-success edit-tujuan" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="fas fa-1x fa-pencil-alt"></i>
+                            </button>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <!-- start tanggung jawab utama -->
                 <hr>
@@ -148,40 +125,33 @@
                                     <th>Tanggung Jawab Utama</th>
                                     <th>Aktivitas Utama</th>
                                     <th>Pengukuran</th>
-                                    <th class="" width="8%"><a href="" class="nTgjwb btn btn-sm btn-primary"
-                                            title="Add New" data-toggle="modal" data-target="#modalTanggungJwb"><i
-                                                class="fas fa-plus-square"></i></a>
+                                    <th class="" width="8%"><a href="" class="nTgjwb btn btn-sm btn-primary" title="Add New" data-toggle="modal" data-target="#modalTanggungJwb"><i class="fas fa-plus-square"></i></a>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
                                 <?php
-                            $posid = $posisi['position_id'];
-                            $sql = "SELECT `position`.`position_name`, `tanggung_jawab`.`keterangan`, `tanggung_jawab`.`list_aktivitas`, `tanggung_jawab`.`list_pengukuran`, `tanggung_jawab`.`id_tgjwb`
+                                $posid = $posisi['position_id'];
+                                $sql = "SELECT `position`.`position_name`, `tanggung_jawab`.`keterangan`, `tanggung_jawab`.`list_aktivitas`, `tanggung_jawab`.`list_pengukuran`, `tanggung_jawab`.`id_tgjwb`
                                     FROM `position`
                                     INNER JOIN `tanggung_jawab` ON `tanggung_jawab`.`id_posisi` = `position`.`id`
                                     WHERE `position`.`id` = $posid";
-                            $tgjwb = $this->db->query($sql)->result_array();
-                            ?>
-                                <?php foreach ($tgjwb as $t): ?>
-                                <tr>
-                                    <td><?= $t['keterangan']; ?></td>
-                                    <td>
-                                        <?= $t['list_aktivitas']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $t['list_pengukuran']; ?>
-                                    </td>
-                                    <td>
-                                        <a href="#" data-id="<?= $t['id_tgjwb']; ?>" data-toggle="modal"
-                                            data-target="#modalTanggungJwb"
-                                            class="eTgjwb btn btn-sm btn-circle btn-success" data-placement="top"
-                                            title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href="<?= base_url('jobs/hapusTanggungJawab/')  .  $t['id_tgjwb']; ?>"
-                                            class="hapusJobs btn btn-sm btn-circle btn-danger" data-placement="top"
-                                            title="Delete"><i class="fas fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                                $tgjwb = $this->db->query($sql)->result_array();
+                                ?>
+                                <?php foreach ($tgjwb as $t) : ?>
+                                    <tr>
+                                        <td><?= $t['keterangan']; ?></td>
+                                        <td>
+                                            <?= $t['list_aktivitas']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $t['list_pengukuran']; ?>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-id="<?= $t['id_tgjwb']; ?>" data-toggle="modal" data-target="#modalTanggungJwb" class="eTgjwb btn btn-sm btn-circle btn-success" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="<?= base_url('jobs/hapusTanggungJawab/')  .  $t['id_tgjwb']; ?>" class="hapusJobs btn btn-sm btn-circle btn-danger" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -189,7 +159,7 @@
                 </div>
                 <!-- start ruang lingkup -->
                 <hr>
-                <?php 
+                <?php
                 $sql = "SELECT * FROM `ruang_lingkup` WHERE `id_posisi` = $posid";
                 $ruangl = $this->db->query($sql)->row_array();
                 ?>
@@ -199,35 +169,32 @@
                         <h6 class="font-weight-light mt-2"><em>(Ruang lingkup dan skala kegiatan yang berhubungan dengan
                                 pekerjaan)</em></h6>
                     </div>
-                    
+                    <div class="col d-flex justify-content-center">
+                        <button type="button" class="btn btn-circle btn-sm btn-success edit-ruang" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-1x fa-pencil-alt"></i></button>
+                    </div>
                 </div>
-                <?php if ($ruangl <= 1): ?>
-                <div class="col-6 mb-3">
-                    <form action="<?= base_url('jobs/addruanglingkup'); ?>" method="post">
-                        <input type="hidden" name="id" value="<?= $posid; ?>">
-                        <div class="form-group">
-                            <textarea class="form-control" name="ruangl" id="ruangl" rows="2"></textarea>
+                <?php if ($ruangl <= 1) : ?>
+                    <div class="col-6 mb-3">
+                        <form action="<?= base_url('jobs/addruanglingkup'); ?>" method="post">
+                            <input type="hidden" name="id" value="<?= $posid; ?>">
+                            <div class="form-group">
+                                <textarea class="form-control" name="ruangl" id="ruangl" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </form>
+                    </div>
+                <?php else : ?>
+                    <div class="row">
+                        <div class="col-11 view-ruang">
+                            <?= $ruangl['r_lingkup']; ?>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                    </form>
-                </div>
-                <?php else: ?>
-                <div class="col d-flex justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-ruang" data-toggle="tooltip"
-                            data-placement="top" title="Edit"><i class="fas fa-1x fa-pencil-alt"></i></button>
                     </div>
-                <div class="row">
-                    <div class="col-11 view-ruang">
-                        <?= $ruangl['r_lingkup']; ?>
+                    <div class="editor-ruang mb-3">
+                        <textarea name="ruang" id="ruang"><?= $ruangl['r_lingkup']; ?></textarea>
+                        <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $ruangl['id']; ?>" id="simpan-ruang">Save</button>
+                        <button class="batal-edit-ruang mt-2 btn btn-danger btn-sm">Cancel</button>
                     </div>
-                </div>
-                <div class="editor-ruang mb-3">
-                    <textarea name="ruang" id="ruang"><?= $ruangl['r_lingkup']; ?></textarea>
-                    <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $ruangl['id']; ?>"
-                        id="simpan-ruang">Save</button>
-                    <button class="batal-edit-ruang mt-2 btn btn-danger btn-sm">Cancel</button>
-                </div>
-                <?php endif ; ?>
+                <?php endif; ?>
                 <!-- start wewenang -->
                 <hr>
                 <div class="row mt-auto mb-2">
@@ -246,30 +213,28 @@
                                 <td>Anda</td>
                                 <td>Atasan 1</td>
                                 <td>Atasan 2</td>
-                                <td><button id="addwen" class="btn btn-sm btn-primary ml-n1"><i
-                                            class="fas fa-plus-square"></i></button></td>
+                                <td><button id="addwen" class="btn btn-sm btn-primary ml-n1"><i class="fas fa-plus-square"></i></button></td>
                             </tr>
                         </thead>
                         <tbody class="">
                             <?php
-                                $sql = "SELECT * FROM `wewenang` WHERE `id_posisi` = $posid";
-                                $wen = $this->db->query($sql)->result_array();
-                                ?>
-                            <?php foreach($wen as $w) : ?>
-                            <tr>
-                                <td><?= $w['id']; ?></td>
-                                <td><?= $w['kewenangan']; ?></td>
-                                <td><?= $w['wen_sendiri']; ?></td>
-                                <td><?= $w['wen_atasan1']; ?></td>
-                                <td><?= $w['wen_atasan2']; ?></td>
-                            </tr>
+                            $sql = "SELECT * FROM `wewenang` WHERE `id_posisi` = $posid";
+                            $wen = $this->db->query($sql)->result_array();
+                            ?>
+                            <?php foreach ($wen as $w) : ?>
+                                <tr>
+                                    <td><?= $w['id']; ?></td>
+                                    <td><?= $w['kewenangan']; ?></td>
+                                    <td><?= $w['wen_sendiri']; ?></td>
+                                    <td><?= $w['wen_atasan1']; ?></td>
+                                    <td><?= $w['wen_atasan2']; ?></td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot id="newWen">
                             <tr>
                                 <form action="<?= base_url('jobs/addwen'); ?>" method="post">
-                                    <td><input type="text" name="wewenang" class="form-control" required
-                                            placeholder="Masukkan Kewenangan"></td>
+                                    <td><input type="text" name="wewenang" class="form-control" required placeholder="Masukkan Kewenangan"></td>
                                     <td>
                                         <select name="wen_sendiri" class="form-control" required>
                                             <option value="">Wewenang Anda</option>
@@ -330,63 +295,57 @@
                                 dalam melakukan pekerjaan :</em></h6>
                     </div>
                 </div>
-                <?php 
-                    $sql = "SELECT * FROM `hub_kerja` WHERE `id_posisi` = $posid";
-                    $hub = $this->db->query($sql)->row_array();
-                    ?>
+                <?php
+                $sql = "SELECT * FROM `hub_kerja` WHERE `id_posisi` = $posid";
+                $hub = $this->db->query($sql)->row_array();
+                ?>
 
-                <?php if($hub <= 1) : ?>
+                <?php if ($hub <= 1) : ?>
 
-                <form method="post" action="<?= base_url('jobs/addHubungan'); ?>">
-                    <input type="hidden" name="id" value="<?= $posid; ?>" />
-                    <div class="form-group">
-                        <label for="internal">Hubungan Internal</label>
-                        <textarea class="form-control" name="internal" id="internal"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="eksternal">Hubungan Eksternal</label>
-                        <textarea class="form-control" name="eksternal" id="eksternal"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                </form>
-
-                <?php else: ?>
-
-                <div class="row ml-2">
-                    <div class="col-5">
-                        <h5><strong>Hubungan Internal</strong></h5>
-                        <div class="hubIntData"><?= $hub['hubungan_int']; ?></div>
-                        <textarea id="hubInt"><?= $hub['hubungan_int']; ?></textarea>
-                        <button data-id="<?= $hub['id']; ?>"
-                            class="btn btn-primary btn-sm simpanhubInt mt-1 mb-2">Save</button>
-                        <button class="btn btn-danger btn-sm batalhubInt mt-1 mb-2">Cancel</button>
-                    </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <span class="edit-hubInt btn btn-sm btn-circle btn-success" data-toggle="tooltip"
-                            data-placement="top" title="Edit"><i
-                                class="fas fa-pencil-alt"></i></span>
-                    </div>
-                    <div class="col-5">
-                        <h5><strong>Hubungan Ekternal</strong></h5>
-                        <div class="hubEksData"> <?= $hub['hubungan_eks']; ?>
+                    <form method="post" action="<?= base_url('jobs/addHubungan'); ?>">
+                        <input type="hidden" name="id" value="<?= $posid; ?>" />
+                        <div class="form-group">
+                            <label for="internal">Hubungan Internal</label>
+                            <textarea class="form-control" name="internal" id="internal"></textarea>
                         </div>
-                        <textarea id="hubEks"><?= $hub['hubungan_eks']; ?></textarea>
-                        <button data-id="<?= $hub['id']; ?>"
-                            class="btn btn-primary btn-sm simpanhubEks mt-1">Save</button>
-                        <button class="btn btn-danger btn-sm batalhubEks mt-1">Cancel</button>
-                    </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <span class="edit-hubEks btn btn-sm btn-circle btn-success" data-toggle="tooltip"
-                            data-placement="top" title="Edit"><i
-                                class="fas fa-pencil-alt"></i></span>
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label for="eksternal">Hubungan Eksternal</label>
+                            <textarea class="form-control" name="eksternal" id="eksternal"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                    </form>
 
-                <?php endif ; ?>
-				<!-- start jumlah staff -->
-				<?php 
-				$dataStaff = [$staff['manager'], $staff['supervisor'], $staff['staff']];
-				?>
+                <?php else : ?>
+
+                    <div class="row ml-2">
+                        <div class="col-5">
+                            <h5><strong>Hubungan Internal</strong></h5>
+                            <div class="hubIntData"><?= $hub['hubungan_int']; ?></div>
+                            <textarea id="hubInt"><?= $hub['hubungan_int']; ?></textarea>
+                            <button data-id="<?= $hub['id']; ?>" class="btn btn-primary btn-sm simpanhubInt mt-1 mb-2">Save</button>
+                            <button class="btn btn-danger btn-sm batalhubInt mt-1 mb-2">Cancel</button>
+                        </div>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <span class="edit-hubInt btn btn-sm btn-circle btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></span>
+                        </div>
+                        <div class="col-5">
+                            <h5><strong>Hubungan Ekternal</strong></h5>
+                            <div class="hubEksData"> <?= $hub['hubungan_eks']; ?>
+                            </div>
+                            <textarea id="hubEks"><?= $hub['hubungan_eks']; ?></textarea>
+                            <button data-id="<?= $hub['id']; ?>" class="btn btn-primary btn-sm simpanhubEks mt-1">Save</button>
+                            <button class="btn btn-danger btn-sm batalhubEks mt-1">Cancel</button>
+                        </div>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <span class="edit-hubEks btn btn-sm btn-circle btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></span>
+                        </div>
+                    </div>
+
+                <?php endif; ?>
+                <!-- start jumlah staff -->
+                <?php
+                $dataStaff = [$staff['manager'], $staff['supervisor'], $staff['staff']];
+                ?>
                 <hr>
                 <div class="row align-items-end mt-2">
                     <div class="col">
@@ -437,178 +396,177 @@
                 </dl>
                 <!-- start tantangan dan maslah utama -->
                 <hr>
-                <?php 
+                <?php
                 $sql = "SELECT * FROM `tantangan` WHERE `id_posisi` = $posid";
                 $tan = $this->db->query($sql)->row_array();
                 ?>
 
-                <?php if($tan <= 1) : ?>
-                <div class="row align-items-end mt-2">
-                    <div class="col">
-                        <h5 class="font-weight-bold">Tantangan Dan Masalah Utama</h5>
-                        <h6 class="font-weight-light mt-2"><em>Tantangan yang melekat pada jabatan dan masalah yang
-                                sulit/ rumit yang dihadapi dalam kurun waktu cukup panjang :</em></h6>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <form method="post" action="<?= base_url('jobs/addtantangan/'); ?>">
-                        <input type="hidden" name="id" value="<?= $my['position_id']; ?>">
-                        <div class="form-group">
-                            <textarea name="tantangan" id="tantangan"></textarea>
+                <?php if ($tan <= 1) : ?>
+                    <div class="row align-items-end mt-2">
+                        <div class="col">
+                            <h5 class="font-weight-bold">Tantangan Dan Masalah Utama</h5>
+                            <h6 class="font-weight-light mt-2"><em>Tantangan yang melekat pada jabatan dan masalah yang
+                                    sulit/ rumit yang dihadapi dalam kurun waktu cukup panjang :</em></h6>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="col-6">
+                        <form method="post" action="<?= base_url('jobs/addtantangan/'); ?>">
+                            <input type="hidden" name="id" value="<?= $my['position_id']; ?>">
+                            <div class="form-group">
+                                <textarea name="tantangan" id="tantangan"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                        </form>
+                    </div>
                 <?php else : ?>
-                <div class="row mt-2">
-                    <div class="col-11">
-                        <h5 class="font-weight-bold">Tantangan Dan Masalah Utama</h5>
-                        <h6 class="font-weight-light mt-2"><em>Tantangan yang melekat pada jabatan dan masalah yang
-                                sulit/ rumit yang dihadapi dalam kurun waktu cukup panjang :</em></h6>
+                    <div class="row mt-2">
+                        <div class="col-11">
+                            <h5 class="font-weight-bold">Tantangan Dan Masalah Utama</h5>
+                            <h6 class="font-weight-light mt-2"><em>Tantangan yang melekat pada jabatan dan masalah yang
+                                    sulit/ rumit yang dihadapi dalam kurun waktu cukup panjang :</em></h6>
+                        </div>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <button type="button" class="btn btn-circle btn-sm btn-success edit-tantangan" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="fas fa-1x fa-pencil-alt"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-tantangan" data-toggle="tooltip"
-                            data-placement="top" title="Edit">
-                            <i class="fas fa-1x fa-pencil-alt"></i>
-                        </button>
+                    <div class="view-tantangan">
+                        <?= $tan['text']; ?>
                     </div>
-                </div>
-                <div class="view-tantangan">
-                    <?= $tan['text']; ?>
-                </div>
-                <div class="editor-tantangan">
-                    <textarea name="tantangan" id="tantangan"><?= $tan['text']; ?></textarea>
-                    <button id="simpan-tantangan" data-id="<?= $tan['id']; ?>"
-                        class="mt-2 btn btn-primary btn-sm">Simpan</button>
-                    <button class="batal-edit-tantangan mt-2 btn btn-danger btn-sm">Batal</button>
-                </div>
+                    <div class="editor-tantangan">
+                        <textarea name="tantangan" id="tantangan"><?= $tan['text']; ?></textarea>
+                        <button id="simpan-tantangan" data-id="<?= $tan['id']; ?>" class="mt-2 btn btn-primary btn-sm">Simpan</button>
+                        <button class="batal-edit-tantangan mt-2 btn btn-danger btn-sm">Batal</button>
+                    </div>
                 <?php endif; ?>
                 <!-- start kualifikasi dan pengalaman -->
                 <hr>
-                <?php 
+                <?php
                 $sql = "SELECT * FROM `kualifikasi` WHERE `id_posisi` = $posid";
                 $kualifikasi = $this->db->query($sql)->row_array();
                 ?>
-                <?php if ($kualifikasi <= 1): ?>
-                <div class="row align-items-end mt-4">
-                    <div class="col">
-                        <h5 class="font-weight-bold">Kualifikasi dan Pengalaman</h5>
-                        <h6 class="font-weight-light mt-2"><em>Persyaratan minimum yang harus dipenuhi : pendidikan,
-                                lama pengalaman kerja yang relevan, kompetensi (soft dan technical skill), atau
-                                kualifikasi personal maupun profesional lainnya :</em></h6>
+                <?php if ($kualifikasi <= 1) : ?>
+                    <div class="row align-items-end mt-4">
+                        <div class="col">
+                            <h5 class="font-weight-bold">Kualifikasi dan Pengalaman</h5>
+                            <h6 class="font-weight-light mt-2"><em>Persyaratan minimum yang harus dipenuhi : pendidikan,
+                                    lama pengalaman kerja yang relevan, kompetensi (soft dan technical skill), atau
+                                    kualifikasi personal maupun profesional lainnya :</em></h6>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 ml-2 mt-2">
-                    <form action="<?= base_url('jobs/addkualifikasi'); ?>" method="post">
-                        <input type="hidden" name="id" value="<?= $posid; ?>">
-                        <div class="form-group">
-                            <label for="pend">Pendidikan Formal</label>
-                            <textarea class="form-control" name="pend" id="pend" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="pengalmn">Pengalaman Kerja</label>
-                            <textarea class="form-control" name="pengalmn" id="pengalmn" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="pengtahu">Pengetahuan</label>
-                            <textarea class="form-control" name="pengtahu" id="pengtahu" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="kptnsi">Kompetensi & Keterampilan</label>
-                            <textarea class="form-control" name="kptnsi" id="kptnsi" rows="2"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                    </form>
-                </div>
-                <?php else: ?>
-                <div class="row mt-4">
-                    <div class="col-11">
-                        <h5 class="font-weight-bold">Kualifikasi dan Pengalaman </h5>
-                        <h6 class="font-weight-light mt-2"><em>Persyaratan minimum yang harus dipenuhi : pendidikan,
-                                lama pengalaman kerja yang relevan, kompetensi (soft dan technical skill), atau
-                                kualifikasi personal maupun profesional lainnya :</em></h6>
+                    <div class="col-6 ml-2 mt-2">
+                        <form action="<?= base_url('jobs/addkualifikasi'); ?>" method="post">
+                            <input type="hidden" name="id" value="<?= $posid; ?>">
+                            <div class="form-group">
+                                <label for="pend">Pendidikan Formal</label>
+                                <textarea class="form-control" name="pend" id="pend" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="pengalmn">Pengalaman Kerja</label>
+                                <textarea class="form-control" name="pengalmn" id="pengalmn" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="pengtahu">Pengetahuan</label>
+                                <textarea class="form-control" name="pengtahu" id="pengtahu" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="kptnsi">Kompetensi & Keterampilan</label>
+                                <textarea class="form-control" name="kptnsi" id="kptnsi" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        </form>
                     </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-kualifikasi"
-                            data-id="<?= $posid; ?>" data-toggle="modal" data-target="#modalKualifikasi"
-                            data-placement="top" title="Edit">
-                            <i class="fas fa-1x fa-pencil-alt"></i>
-                        </button>
+                <?php else : ?>
+                    <div class="row mt-4">
+                        <div class="col-11">
+                            <h5 class="font-weight-bold">Kualifikasi dan Pengalaman </h5>
+                            <h6 class="font-weight-light mt-2"><em>Persyaratan minimum yang harus dipenuhi : pendidikan,
+                                    lama pengalaman kerja yang relevan, kompetensi (soft dan technical skill), atau
+                                    kualifikasi personal maupun profesional lainnya :</em></h6>
+                        </div>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <button type="button" class="btn btn-circle btn-sm btn-success edit-kualifikasi" data-id="<?= $posid; ?>" data-toggle="modal" data-target="#modalKualifikasi" data-placement="top" title="Edit">
+                                <i class="fas fa-1x fa-pencil-alt"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="table-responsive">
-                    <table id="tableK" class="table table-borderless tableK" width="25%">
-                        <tbody>
-                            <tr>
-                                <th class="head-kualifikasi">Pendidikan Formal</th>
-                                <td id="pendidikan">: <?= $kualifikasi['pendidikan']; ?></td>
-                            </tr>
-                            <tr>
-                                <th class="head-kualifikasi">Pengalaman Kerja</th>
-                                <td id="pengalaman">: <?= $kualifikasi['pengalaman']; ?></td>
-                            </tr>
-                            <tr>
-                                <th class="head-kualifikasi">Pengetahuan</th>
-                                <td id="pengetahuan">: <?= $kualifikasi['pengetahuan']; ?></td>
-                            </tr>
-                            <tr>
-                                <th class="head-kualifikasi">Kompetensi & Keterampilan</th>
-                                <td id="kompetensi">: <?= $kualifikasi['kompetensi']; ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="table-responsive">
+                        <table id="tableK" class="table table-borderless tableK" width="25%">
+                            <tbody>
+                                <tr>
+                                    <th class="head-kualifikasi">Pendidikan Formal</th>
+                                    <td id="pendidikan">: <?= $kualifikasi['pendidikan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="head-kualifikasi">Pengalaman Kerja</th>
+                                    <td id="pengalaman">: <?= $kualifikasi['pengalaman']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="head-kualifikasi">Pengetahuan</th>
+                                    <td id="pengetahuan">: <?= $kualifikasi['pengetahuan']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="head-kualifikasi">Kompetensi & Keterampilan</th>
+                                    <td id="kompetensi">: <?= $kualifikasi['kompetensi']; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 <?php endif; ?>
                 <!-- start jenjang karir -->
                 <hr>
-                <?php 
+                <?php
                 $sql = "SELECT * FROM `jenjang_kar` WHERE `id_posisi` = $posid";
                 $jenk = $this->db->query($sql)->row_array();
                 ?>
 
-                <?php if ($jenk <= 1): ?>
-                <div class="row align-items-end mt-3">
-                    <div class="col">
-                        <h5 class="font-weight-bold">Jabatan Berikutnya Di Masa Depan</h5>
-                        <h6 class="font-weight-light mt-2"><em>Pergerakan karir yang memungkinkan setelah memegang
-                                jabatan ini? (baik yang utama/ primary maupun yang secondary):</em></h6>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <form action="<?= base_url('jobs/addjenjangkarir'); ?>" method="post">
-                        <input type="hidden" name="id" value="<?= $posid; ?>">
-                        <div class="form-group">
-                            <label for="jenkar">Jabatan Di Masa Depan :</label>
-                            <textarea class="form-control" name="jenkar" id="jenkar" rows="2"></textarea>
+                <?php if ($jenk <= 1) : ?>
+                    <div class="row align-items-end mt-3">
+                        <div class="col">
+                            <h5 class="font-weight-bold">Jabatan Berikutnya Di Masa Depan</h5>
+                            <h6 class="font-weight-light mt-2"><em>Pergerakan karir yang memungkinkan setelah memegang
+                                    jabatan ini? (baik yang utama/ primary maupun yang secondary):</em></h6>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                    </form>
-                </div>
-                <?php else: ?>
-                <div class="row mt-3">
-                    <div class="col-11">
-                        <h5 class="font-weight-bold">Jabatan Berikutnya Di Masa Depan</h5>
-                        <h6 class="font-weight-light mt-2"><em>Pergerakan karir yang memungkinkan setelah memegang
-                                jabatan ini? (baik yang utama/ primary maupun yang secondary):</em></h6>
                     </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <button type="button" class="btn btn-circle btn-sm btn-success edit-jenjang" data-toggle="tooltip"
-                            data-placement="top" title="Edit">
-                            <i class="fas fa-1x fa-pencil-alt"></i>
-                        </button>
+                    <div class="col-6">
+                        <form action="<?= base_url('jobs/addjenjangkarir'); ?>" method="post">
+                            <input type="hidden" name="id" value="<?= $posid; ?>">
+                            <div class="form-group">
+                                <label for="jenkar">Jabatan Di Masa Depan :</label>
+                                <textarea class="form-control" name="jenkar" id="jenkar" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        </form>
                     </div>
-                </div>
-                <div class="view-jenjang">
-                    <?= $jenk['text']; ?>
-                </div>
-                <div class="editor-jenkar">
-                    <textarea name="jenkar" id="jenkar"><?= $jenk['text']; ?></textarea>
-                    <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $jenk['id']; ?>"
-                        id="simpan-jenjang">Save</button>
-                    <button class="batal-edit-jenjang mt-2 btn btn-danger btn-sm">Cancel</button>
-                </div>
-                <?php endif ; ?>
+                <?php else : ?>
+                    <div class="row mt-3">
+                        <div class="col-11">
+                            <h5 class="font-weight-bold">Jabatan Berikutnya Di Masa Depan</h5>
+                            <h6 class="font-weight-light mt-2"><em>Pergerakan karir yang memungkinkan setelah memegang
+                                    jabatan ini? (baik yang utama/ primary maupun yang secondary):</em></h6>
+                        </div>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <button type="button" class="btn btn-circle btn-sm btn-success edit-jenjang" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="fas fa-1x fa-pencil-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="view-jenjang">
+                        <?= $jenk['text']; ?>
+                    </div>
+                    <div class="editor-jenkar">
+                        <textarea name="jenkar" id="jenkar"><?= $jenk['text']; ?></textarea>
+                        <button type="submit" class="mt-2 btn btn-primary btn-sm" data-id="<?= $jenk['id']; ?>" id="simpan-jenjang">Save</button>
+                        <button class="batal-edit-jenjang mt-2 btn btn-danger btn-sm">Cancel</button>
+                    </div>
+                <?php endif; ?>
 
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary btn-sm btnApprove" data-mynik="<?= $user['nik']; ?>" data-position="<?= $my['position_id']; ?>" data-atasan1="<?= $my['posnameatasan1']; ?>" data-atasan2="<?= $my['id_atasan2']; ?>">Submit</button>
+                <br>
+                <small class="text-muted">* Pastikan semua data anda telah terisi dengan benar.<strong><br>* Setelah anda menekan tombol submit, anda tidak akan bisa mengubah untuk sementara.</strong></small>
             </div>
         </div>
     </div> <!-- Dangerrrrrr -->
